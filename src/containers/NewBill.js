@@ -22,6 +22,17 @@ export default class NewBill {
     const fileName = filePath[filePath.length-1]
     const formData = new FormData()
     const email = JSON.parse(localStorage.getItem("user")).email
+
+    
+    //prevent from saving not images file
+    const authorizedType = ["image/jpeg", "image/jpg", "image/png"]
+
+    if(!authorizedType.includes(file.type)){
+      this.document.querySelector(`input[data-testid="file"]`).value=""
+      return
+    }
+
+
     formData.append('file', file)
     formData.append('email', email)
 
